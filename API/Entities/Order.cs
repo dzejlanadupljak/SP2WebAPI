@@ -1,4 +1,5 @@
 ﻿using Domain.Enums;
+using System.Collections.Generic;
 
 namespace Domain.Entities
 {
