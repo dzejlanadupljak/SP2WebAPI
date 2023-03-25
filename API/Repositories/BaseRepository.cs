@@ -1,6 +1,8 @@
 ﻿using Domain.Contracts;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace Application.Repositories
@@ -8,6 +10,8 @@ namespace Application.Repositories
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
         private readonly ApplicationDbContext _context;
+
+        IQueryable<T> IBaseRepository<T>.FindAll => throw new NotImplementedException();
 
         public BaseRepository(ApplicationDbContext context)
         {
@@ -31,9 +35,10 @@ namespace Application.Repositories
         {
             _context.Set<T>().Update(entity);
         }
-        public void Delete(T entity)
-        {
-            _context.Set<T>().Remove(entity);
+        public void Delete(T entity) => _context.Set<T>().Remove(entity);
+
+        
+           
         }
     }
-}
+
